@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Korada Priyanka — Portfolio</title>
+    <style>
+        :root {
+            --bg: #01030b;
+            --panel-border: rgba(255, 255, 255, 0.12);
+            --accent: #c7ff00;
+            --accent-2: #3fea4c;
+            --text: #f5f7ff;
+            --muted: rgba(245, 247, 255, 0.72);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background:
+                linear-gradient(180deg, #03030a 0%, #03030a 45%, #080e1d 100%),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 140px 140px, 140px 140px;
+            background-position: top left, 0 0, 0 0;
+            color: var(--text);
+            font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            margin: 2rem auto 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            padding: 3rem;
+            border-radius: 32px;
+            background: #03030a;
+            border: 1px solid var(--panel-border);
+            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.85);
+            position: relative;
+            overflow: visible;
+            perspective: 1000px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            align-items: center;
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .hero-subtitle-pill {
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            font-size: 0.75rem;
+            letter-spacing: 0.3rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 4vw, 3.9rem);
+            margin: 0.8rem 0;
+            line-height: 1.1;
+        }
+
+        /* NAME TYPING EFFECT */
+        .typing-container {
+            display: inline-block;
+            margin: 0.8rem 0;
+        }
+
+        .typing-text {
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2.8rem, 4vw, 3.9rem);
+            font-weight: 800;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 0.15em solid var(--accent);
+            background: linear-gradient(90deg, #fff 0%, var(--accent) 50%, var(--accent-2) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            width: 0;
+            animation: 
+                typing 5s steps(30, end) infinite,
+                blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            0% { width: 0; }
+            40% { width: 100%; }
+            60% { width: 100%; }
+            90% { width: 0; }
+            100% { width: 0; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--accent); }
+        }
+
+        .hero-content p {
+            line-height: 1.75;
+            color: var(--muted);
+            max-width: 540px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-cta {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .hero-cta a {
+            padding: 0.85rem 1.8rem;
+            border-radius: 999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta a.primary {
+            background: linear-gradient(120deg, var(--accent), var(--accent-2));
+            color: #03030a;
+        }
+
+        .hero-cta a.secondary {
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: var(--text);
+            background: transparent;
+        }
+
+        .hero-cta a:hover {
+            transform: translateY(-3px);
+        }
+
+        /* --- 3D HERO VISUAL SECTION --- */
+        .hero-visual {
+            background: transparent; 
+            border-radius: 40px;
+            padding: 2rem;
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+            transition: transform 0.1s ease-out; 
+        }
+
+        .hero-visual::before {
+            content: "";
+            position: absolute;
+            inset: 20px;
+            background: radial-gradient(circle, rgba(199, 255, 0, 0.15), transparent 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+            transform: translateZ(-50px);
+        }
+
+        .hero-visual img {
+            width: 250px;
+            border-radius: 28px;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));
+            transform: translateZ(50px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .visual-badge, .visual-badge2 {
+            position: absolute;
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            background: #ffffff;
+            color: #03030a;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+            z-index: 3;
+            transform: translateZ(80px);
+        }
+
+        .visual-badge { top: 16px; right: 26px; }
+        .visual-badge2 { bottom: 30px; left: -10px; }
+
+        /* --- CODE TYPING TERMINAL ANIMATION --- */
+        .code-card {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 200px;
+            background: rgba(10, 15, 30, 0.95);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transform: translateZ(100px);
+            z-index: 4;
+            backdrop-filter: blur(5px);
+        }
+
+        .code-header {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 5px;
+        }
+
+        .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .code-content {
+            height: 60px;
+            overflow: hidden;
+            white-space: pre-wrap;
+        }
+
+        .type-code::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+
+        /* --- SECTIONS --- */
+        .section {
+            padding: 2.5rem;
+            border-radius: 28px;
+            background: rgba(3, 6, 18, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.65);
+        }
+        
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.35rem;
+            color: #fff;
+        }
+
+        .section p, .section li { color: var(--muted); line-height: 1.6; }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .highlight-card {
+            padding: 1.35rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .timeline {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .timeline li {
+            padding-left: 1.5rem;
+            border-left: 2px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+        }
+
+        .timeline li::before {
+            content: "";
+            position: absolute;
+            left: -0.5rem;
+            top: 0.3rem;
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+        }
+
+        .project-card {
+            padding: 1.5rem;
+            background: rgba(8, 12, 28, 0.95);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            min-height: 230px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card button {
+            margin-top: 1rem;
+            border-radius: 999px;
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-weight: 600;
+            background: linear-gradient(120deg, var(--accent), var(--accent-2));
+            color: #03030a;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card button:hover { transform: translateY(-4px); }
+
+        .skill-category { margin-bottom: 1.5rem; }
+        .skill-category h3 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .skill-grid, .language-grid { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .skill-pill, .language-pill {
+            padding: 0.6rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        .skill-pill:hover { border-color: var(--accent); background: rgba(199, 255, 0, 0.1); }
+
+        .cert-list { display: grid; gap: 1rem; }
+        .cert-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: slideInUp 0.6s ease forwards;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .cert-item:hover { transform: translateX(10px); border-color: var(--accent); }
+        .cert-item:nth-child(1) { animation-delay: 0.1s; }
+        .cert-item:nth-child(2) { animation-delay: 0.2s; }
+        .cert-item:nth-child(3) { animation-delay: 0.3s; }
+        .cert-item:nth-child(4) { animation-delay: 0.4s; }
+        .cert-item:nth-child(5) { animation-delay: 0.5s; }
+        .cert-item:nth-child(6) { animation-delay: 0.6s; }
+        .cert-item:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .email-section {
+            padding: 2.5rem;
+            border-radius: 26px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .animated-name {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #fff, var(--accent), var(--accent-2), #fff);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textShine 4s linear infinite;
+        }
+        @keyframes textShine { to { background-position: 300% center; } }
+
+        .social-icon { width: 28px; height: 28px; fill: var(--muted); transition: all 0.3s ease; }
+        .social-link:hover .social-icon { fill: var(--accent); transform: scale(1.1); }
+
+        .book-btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background: linear-gradient(120deg, var(--accent), var(--accent-2));
+            color: #03030a;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: transform 0.2s ease;
+        }
+        .book-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(199, 255, 0, 0.2); }
+
+        /* --- FOOTER STYLES --- */
+        .site-footer {
+            width: 100%;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        .site-footer span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 2rem; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .typing-text { font-size: 2.2rem; }
+            main { padding: 0 1rem 2rem; }
+            .email-section { flex-direction: column; text-align: center; }
+            .hero-visual { transform: none !important; } 
+            .code-card { right: 10px; bottom: -30px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="hero-title-row">
+                    <span class="hero-subtitle-pill">Hello There!</span>
+                </div>
+                <h1>I'm</h1>
+                <div class="typing-container">
+                    <div class="typing-text">Korada Priyanka</div>
+                </div>
+                
+                <p>
+                    Remote-first IT professional who translates complex requirements into reliable AWS and web solutions while
+                    keeping stakeholders aligned. I blend strong communication, rapid learning, and a proactive, can-do
+                    attitude with disciplined, customer-centric work habits so hybrid teams can move quickly without sacrificing
+                    quality or compliance.
+                </p>
+                <div class="hero-cta">
+                    <a class="primary" href="Korada Priyanka Resume 2025.pdf">Download Resume</a>
+                    <a class="secondary" href="mailto:priyakorada4@gmail.com">Hire me</a>
+                </div>
+            </div>
+            
+            <div class="hero-visual" id="heroVisual">
+                <div class="visual-badge">Web Developer</div>
+                <div class="visual-badge2">Front-End Developer</div>
+                <img src="Priyanka.png" alt="Portrait of Korada Priyanka" />
+                
+                <div class="code-card">
+                    ss="code-content">
+                        <span class="type-code" id="codeTyper"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section" id="summary">
+            <div class="section-heading">
+                <span>🛰️</span>
+                <strong>Professional Summary</strong>
+            </div>
+            <p>
+                AWS-focused engineer who blends infrastructure discipline with people-first coordination. I design
+                cloud pipelines, secure APIs, and responsive front-end patterns that keep healthcare and regulated
+                partners aligned from pilot feedback to product launch.
+            </p>
+            <div class="highlight-grid">
+                <div class="highlight-card">
+                    <strong>Systems Delivered</strong>
+                    <p>Serverless automation, role-aware Flask APIs, and interactive dashboards for clinical pilots.</p>
+                </div>
+                <div class="highlight-card">
+                    <strong>Compliance Track</strong>
+                    <p>Automated governance with IAM guardrails and real-time CloudWatch + Security Hub alerts.</p>
+                </div>
+                <div class="highlight-card">
+                    <strong>Team Rhythm</strong>
+                    <p>Pairing rituals, playbooks, and async docs so hybrid teams never lose context.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="achievements">
+            <div class="section-heading">
+                <span>🏅</span>
+                <strong>Achievements</strong>
+            </div>
+            <ul class="timeline">
+                <li>
+                    <strong>Modular serverless workflow</strong>
+                    <p>Championed a workflow that reduced deployment lead time and improved observability for healthcare-focused pilots.</p>
+                </li>
+                <li>
+                    <strong>MedTrack MVP launch</strong>
+                    <p>Led cross-functional delivery, aligning product, data, and engineering to capture measurable clinical improvements.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section" id="experience">
+            <div class="section-heading">
+                <span>💼</span>
+                <strong>Experience</strong>
+            </div>
+            <ul class="timeline">
+                <li>
+                    <strong>AWS Cloud Intern · Smart Bridge / Amazon Web Services</strong>
+                    <p>May 2025 – Aug 2025 · Cloud Infrastructure, Automation, Observability</p>
+                    <p>Provisioned secure, scalable resources with EC2, S3, and CloudFormation; automated API-driven data workflows via Lambda, API Gateway, and DynamoDB.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section" id="projects">
+            <div class="section-heading">
+                <span>🧩</span>
+                <strong>Projects</strong>
+            </div>
+            <div class="project-grid">
+                <article class="project-card">
+                    <div>
+                        <div class="meta">Cloud-Enabled Healthcare System</div>
+                        <h3>Project Lead – MedTrack</h3>
+                        <p>Coordinated scheduling, clinician workflows, and patient portals while preserving compliance through role-aware authentication and encryption.</p>
+                    </div>
+                    <div>
+                        <button type="button">Explore MedTrack</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="skills">
+            <div class="section-heading">
+                <span>🛠️</span>
+                <strong>Technical Skills</strong>
+            </div>
+            <div class="skill-category">
+                <h3>Cloud & DevOps</h3>
+                <div class="skill-grid">
+                    <span class="skill-pill">AWS</span>
+                    <span class="skill-pill">EC2 & S3</span>
+                    <span class="skill-pill">Lambda</span>
+                    <span class="skill-pill">CloudFormation</span>
+                    <span class="skill-pill">API Gateway</span>
+                    <span class="skill-pill">CloudWatch</span>
+                    <span class="skill-pill">IAM</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Web Development</h3>
+                <div class="skill-grid">
+                    <span class="skill-pill">Flask</span>
+                    <span class="skill-pill">Django</span>
+                    <span class="skill-pill">HTML5</span>
+                    <span class="skill-pill">CSS3</span>
+                    <span class="skill-pill">Responsive Design</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Languages & Databases</h3>
+                <div class="skill-grid">
+                    <span class="skill-pill">Python</span>
+                    <span class="skill-pill">C</span>
+                    <span class="skill-pill">MySQL</span>
+                    <span class="skill-pill">DynamoDB</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <div class="section-heading">
+                <span>🎓</span>
+                <strong>Education</strong>
+            </div>
+            <ul class="timeline">
+                <li>
+                    <strong>B.Tech in Information Technology · Aditya Institute of Technology and Management, Tekkali</strong>
+                    <p>Expected 2026 · 7.31 CGPA</p>
+                </li>
+                <li>
+                    <strong>Intermediate (MPC) · Sri Chaitanya Junior College, Palasa</strong>
+                    <p>2022 · 62.3%</p>
+                </li>
+                <li>
+                    <strong>SSC · Sri Chaitanya School, Palasa</strong>
+                    <p>2020 · 7.9 GPA</p>
+                </li>
+            </ul>
+        </section>
+
+        <section class="section" id="certifications">
+            <div class="section-heading">
+                <span>📜</span>
+                <strong>Certifications</strong>
+            </div>
+            <div class="cert-list">
+                <div class="cert-item">
+                    <span class="cert-icon">☁️</span>
+                    <div><strong>AWS Cloud Computing</strong> — APSSDC</div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">🔐</span>
+                    <div><strong>Ethical Hacking (L1)</strong> — Supraja Technologies</div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">📊</span>
+                    <div><strong>Data Analytics Job Simulation</strong> — Deloitte / Forage · July 2025</div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">⏱️</span>
+                    <div><strong>Productivity Enhancement Tools</strong> — APSSDC · May 2023</div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">🐍</span>
+                    <div><strong>Django Web Development</strong> — APSSDC</div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">💻</span>
+                    <div><strong>Data Structures &amp; Algorithms</strong> — GeeksforGeeks + AITAM · Aug 2025</div>
+                </div>
+                <div class="cert-item">
+                    <span class="cert-icon">📜</span>
+                    <div><strong>Basics of Python</strong> — Infosys Springboard · June 2025</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="languages">
+            <div class="section-heading">
+                <span>🗣️</span>
+                <strong>Languages</strong>
+            </div>
+            <div class="language-grid">
+                <span class="language-pill">English</span>
+                <span class="language-pill">Telugu</span>
+                <span class="language-pill">Hindi</span>
+            </div>
+        </section>
+
+        <section class="email-section">
+            <div class="email-content">
+                <p>Let’s Architect the Next Solution</p>
+                <div class="animated-name">KORADA PRIYANKA</div>
+                <div class="email-actions">
+                    <a href="https://www.linkedin.com/in/korada-priyanka-57370a316/" target="_blank" class="social-link" title="LinkedIn">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/koradapriyanka-25/" target="_blank" class="social-link" title="GitHub">
+                        <svg class="social-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <a href="mailto:priyakorada4@gmail.com?subject=Book%20a%20Conversation" class="book-btn">
+                Book a Conversation
+            </a>
+        </section>
+        
+        <footer class="site-footer">
+            Designed by <span>KORADA PRIYANKA</span> (ALL RIGHTS RESERVED 2026)
+        </footer>
+    </main>
+
+    <script>
+        // --- 1. 3D TILT ANIMATION ---
+        const card = document.getElementById('heroVisual');
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Calculate center
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Calculate rotate values (scaled down for subtlety)
+            const rotateX = ((y - centerY) / centerY) * -10; 
+            const rotateY = ((x - centerX) / centerX) * 10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            // Reset position
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+
+        // --- 2. CODE TYPING TERMINAL ANIMATION ---
+        const codeText = [
+            "class Developer:",
+            "  def __init__(self):",
+            "    self.stack = ['AWS', 'Python']",
+            "    self.passion = 'Cloud'",
+            "  def build(self):",
+            "    return 'Secure Solutions'"
+        ];
+        
+        const typeTarget = document.getElementById('codeTyper');
+        let lineIndex = 0;
+        let charIndex = 0;
+
+        function typeCode() {
+            if (lineIndex < codeText.length) {
+                const currentLine = codeText[lineIndex];
+                if (charIndex < currentLine.length) {
+                    typeTarget.textContent += currentLine.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeCode, 50); // Typing speed
+                } else {
+                    typeTarget.textContent += '\n'; // New line
+                    lineIndex++;
+                    charIndex = 0;
+                    setTimeout(typeCode, 300); // Pause before next line
+                }
+            } else {
+                // Reset to loop
+                setTimeout(() => {
+                    typeTarget.textContent = '';
+                    lineIndex = 0;
+                    charIndex = 0;
+                    typeCode();
+                }, 3000); // Wait 3s before clearing
+            }
+        }
+        
+        // Start code typing
+        typeCode();
+    </script>
+</body>
+</html>
